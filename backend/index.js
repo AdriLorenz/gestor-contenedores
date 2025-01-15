@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Uso de rutas
-// app.use('/api/locations', locationRoutes);
+app.use('/api/locations', locationRoutes);
 // app.use('/api/elements', elementRoutes);
 
 // Manejo de errores

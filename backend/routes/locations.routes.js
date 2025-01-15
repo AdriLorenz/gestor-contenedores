@@ -1,13 +1,22 @@
 const express = require('express');
-const { getLocations, addLocation, updateLocation, deleteLocation } = require('../controllers/locations.controller');
+const { getLocations, getLocationById, addLocation, updateLocation, deleteLocation } = require('../controllers/locations.controller');
 
 const validate = require('../middleware/validation');
-const { body, param } = require(express-validator);
+const { body, param } = require('express-validator');
 
 const router = express.Router();
 
 // GET de todas las ubicaciones
 router.get('/', getLocations);
+
+// GET de una ubicación por ID
+router.get(
+    '/:id',
+    validate([
+        param('id').isNumeric().withMessage('El ID debe de ser un número')
+    ]),
+    getLocationById
+);
 
 // POST ubicación
 router.post(

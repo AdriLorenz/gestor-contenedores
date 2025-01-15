@@ -40,3 +40,5 @@ router.delete(
     ]),
     deleteLocation
 );
+
+module.exports = router;

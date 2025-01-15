@@ -15,7 +15,7 @@ app.use(cors());
 
 // Uso de rutas
 app.use('/api/locations', locationRoutes);
-// app.use('/api/elements', elementRoutes);
+app.use('/api/elements', elementRoutes);
 
 // Manejo de errores
 app.use((err, req, res, next) => {

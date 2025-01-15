@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "test",
+    "lat": 40.416775,
+    "lng": -3.70379,
+    "associatedLocationId": 1
+  },
+  {
+    "id": 1736948532692,
+    "name": "Nuevo Elemento",
+    "lat": 41.3879,
+    "lng": 2.16992,
+    "associatedLocationId": 1
+  }
+]

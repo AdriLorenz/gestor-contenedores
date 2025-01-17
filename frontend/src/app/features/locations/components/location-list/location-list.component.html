@@ -1,1 +1,8 @@
-<p>location-list works!</p>,
+<h1>Ubicaciones</h1>
+<button mat-raised-button color="primary" (click)="openAddEditDialog()">Agregar Ubicación</button>
+<div *ngFor="let location of (locations$ | async)">
+  <h3>{{ location.name }}</h3>
+  <p>Latitud: {{ location.lat }} | Longitud: {{ location.lng }}</p>
+  <button mat-button (click)="openAddEditDialog(location)">Editar</button>
+  <button mat-button color="warn" (click)="deleteLocation(location.id)">Eliminar</button>
+</div>

@@ -22,26 +22,26 @@ export class MapComponent {
 
   constructor(private locationService: LocationService) {}
 
-  // ngOnInit(): void {
-  //   // Cargar ubicaciones iniciales y convertirlas en marcadores
-  //   this.locationService.locations$.subscribe((locations) => {
-  //     this.markers = locations.map((location) => ({
-  //       position: { lat: location.lat, lng: location.lng },
-  //       title: location.name || 'Sin nombre',
-  //     }));
-  //   });
+  ngOnInit(): void {
+    // Cargar ubicaciones iniciales y convertirlas en marcadores
+    this.locationService.locations$.subscribe((locations) => {
+      this.markers = locations.map((location) => ({
+        position: { lat: location.lat, lng: location.lng },
+        title: location.name || 'Sin nombre',
+      }));
+    });
 
-  //   // Llamar explícitamente al método para cargar ubicaciones iniciales
-  //   this.locationService.getLocations();
-  // }
+    // Llamar explícitamente al método para cargar ubicaciones iniciales
+    this.locationService.getLocations();
+  }
 
-  // addMarker(event: google.maps.MapMouseEvent): void {
-  //   if (event.latLng) {
-  //     const lat = event.latLng.lat();
-  //     const lng = event.latLng.lng();
-  //     const name = prompt('Nombre de la ubicación:') || 'Nueva ubicación';
+  addMarker(event: google.maps.MapMouseEvent): void {
+    if (event.latLng) {
+      const lat = event.latLng.lat();
+      const lng = event.latLng.lng();
+      const name = prompt('Nombre de la ubicación:') || 'Nueva ubicación';
 
-  //     this.locationService.addLocation({ name, lat, lng });
-  //   }
-  // }
+      this.locationService.addLocation({ name, lat, lng });
+    }
+  }
 }

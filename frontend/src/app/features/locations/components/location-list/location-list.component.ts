@@ -31,18 +31,20 @@ export class LocationListComponent {
   openAddEditDialog(location: any = null): void {
     const dialogRef = this.dialog.open(EditLocationDialogComponent, {
       width: '400px',
+      height: '300px',
       data: location,
     });
 
-    dialogRef.afterClosed().subscribe(() => this.locationService.getLocations());
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('Ubicación actualizada:', result);
+      }
+    });
   }
 
   deleteLocation(id: number): void {
     if (confirm('¿Estás seguro de que quieres eliminar esta ubicación?')) {
-      this.locationService.locations$.subscribe((currentLocations) => {
-        const updatedLocations = currentLocations.filter((loc) => loc.id !== id);
-        this.locationService.updateLocations(updatedLocations);
-      });
+      this.locationService.deleteLocationById(id);
     }
   }
 }

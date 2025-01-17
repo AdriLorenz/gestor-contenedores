@@ -22,7 +22,17 @@ export class LocationService {
     this.locationsSubject.next([...currentLocations, newLocation]);
   }
 
-  updateLocations(locations: any[]): void {
-    this.locationsSubject.next(locations);
+  updateLocations(id: number, updatedLocation: any): void {
+    const currentLocations = this.locationsSubject.getValue();
+    const updatedLocations = currentLocations.map((loc) =>
+      loc.id === id ? { ...loc, ...updatedLocation } : loc
+    );
+    this.locationsSubject.next(updatedLocations);
+  }
+
+  deleteLocationById(id: number): void {
+    const currentLocations = this.locationsSubject.getValue();
+    const updatedLocations = currentLocations.filter((loc) => loc.id !== id);
+    this.locationsSubject.next(updatedLocations);
   }
 }

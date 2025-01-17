@@ -1,3 +1,17 @@
-:host {
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+}
+
+google-map {
   display: block;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+map-marker {
+  cursor: pointer;
 }

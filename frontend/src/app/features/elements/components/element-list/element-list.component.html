@@ -1,1 +1,8 @@
-<p>element-list works!</p>,
+<h1>Elementos</h1>
+<button mat-raised-button color="primary" (click)="openAddEditDialog()">Agregar Elemento</button>
+<div *ngFor="let element of (elements$ | async)">
+  <h3>{{ element.name }}</h3>
+  <p>Latitud: {{ element.lat }} | Longitud: {{ element.lng }}</p>
+  <button mat-button (click)="openAddEditDialog(element)">Editar</button>
+  <button mat-button color="warn" (click)="deleteElement(element.id)">Eliminar</button>
+</div>

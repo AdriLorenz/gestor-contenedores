@@ -17,7 +17,6 @@ export class MapComponent {
   center: google.maps.LatLngLiteral = { lat: 40.416775, lng: -3.70379 };
   zoom = 8;
   markers: { position: google.maps.LatLngLiteral; title: string }[] = [];
-  
 
   constructor(private locationService: LocationService) {}
 
@@ -30,7 +29,6 @@ export class MapComponent {
       }));
     });
 
-    // Llamar explícitamente al método para cargar ubicaciones iniciales
     this.locationService.getLocations();
   }
 
@@ -40,7 +38,16 @@ export class MapComponent {
       const lng = event.latLng.lng();
       const name = prompt('Nombre de la ubicación:') || 'Nueva ubicación';
 
-      this.locationService.addLocation({ name, lat, lng });
+      // Agregar la ubicación a través del servicio
+      this.locationService.addLocation({ name, lat, lng }).subscribe({
+        next: () => {
+          console.log('Ubicación agregada correctamente');
+          this.locationService.getLocations();
+        },
+        error: (error) => {
+          console.error('Error al agregar la ubicación:', error);
+        }
+      });
     }
   }
 }

@@ -4,6 +4,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { EditLocationDialogComponent } from '../../dialogs/edit-location-dialog/edit-location-dialog.component';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-location-list',
@@ -18,16 +19,16 @@ import { MatButtonModule } from '@angular/material/button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LocationListComponent { 
-  locations$
+  locations$: Observable<any> | undefined;
 
   constructor(
     private locationService: LocationService, 
     private dialog: MatDialog
-  ) {
-    this.locations$ = this.locationService.locations$;
-  }
+  ) {}
 
   ngOnInit(): void {
+    // Ahora inicializamos locations$ dentro de ngOnInit()
+    this.locations$ = this.locationService.locations$;
     this.locationService.getLocations();
   }
 
@@ -36,23 +37,48 @@ export class LocationListComponent {
       width: '400px',
       data: location,
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         if (location) {
           // Editar ubicación existente
-          this.locationService.updateLocation(location.id, result).subscribe();
+          this.locationService.updateLocation(location.id, result).subscribe({
+            next: () => {
+              console.log('Ubicación actualizada con éxito');
+              this.locationService.getLocations();  // Actualizamos las ubicaciones
+            },
+            error: (error) => {
+              console.error('Error al actualizar la ubicación:', error);
+            }
+          });
         } else {
           // Agregar nueva ubicación
-          this.locationService.addLocation(result).subscribe();
+          this.locationService.addLocation(result).subscribe({
+            next: () => {
+              console.log('Ubicación agregada con éxito');
+              this.locationService.getLocations(); // Actualizamos las ubicaciones
+            },
+            error: (error) => {
+              console.error('Error al agregar la ubicación:', error);
+            }
+          });
         }
       }
     });
   }
-  
+
   deleteLocation(id: number): void {
     if (confirm('¿Estás seguro de que quieres eliminar esta ubicación?')) {
-      this.locationService.deleteLocationById(id).subscribe();
+      this.locationService.deleteLocationById(id).subscribe({
+        next: () => {
+          console.log('Ubicación eliminada con éxito');
+          this.locationService.getLocations(); // Actualizamos las ubicaciones
+        },
+        error: (error) => {
+          console.error('Error al eliminar la ubicación:', error);
+        }
+      });
     }
   }
+
 }

@@ -8,7 +8,7 @@ import { LocationListComponent } from './app/features/locations/components/locat
 import { ElementListComponent } from './app/features/elements/components/element-list/element-list.component';
 import { MapComponent } from './app/features/map/components/map/map.component';
 import { importProvidersFrom } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
@@ -20,6 +20,7 @@ const routes: Routes = [
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
-    importProvidersFrom(BrowserAnimationsModule, GoogleMapsModule, HttpClientModule, MatDialogModule, MatDialog),
+    importProvidersFrom(BrowserAnimationsModule, GoogleMapsModule, MatDialogModule),
+    provideHttpClient(withInterceptorsFromDi()),
   ],
 }).catch((err) => console.error(err));

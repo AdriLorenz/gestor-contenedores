@@ -12,7 +12,6 @@ import { CommonModule } from '@angular/common';
   ],
   templateUrl: './map.component.html',
   styleUrl: './map.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent { 
   center: google.maps.LatLngLiteral = { lat: 40.416775, lng: -3.70379 };

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,14 +20,16 @@ export class LocationService {
   }
 
   addLocation(location: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, location).pipe(
-      tap(() => this.getLocations())
-    );
+    console.log('Enviando datos al backend:', location);
+    return this.http.post<any>(this.apiUrl, location);
   }
 
+  // Actualizar ubicación existente
   updateLocation(id: number, updatedLocation: any): Observable<any> {
     return this.http.patch<any>(`${this.apiUrl}/${id}`, updatedLocation).pipe(
-      tap(() => this.getLocations())
+      tap((response) => {
+        console.log('Ubicación actualizada:', response);
+      })
     );
   }
 

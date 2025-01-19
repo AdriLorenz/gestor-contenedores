@@ -39,11 +39,28 @@ export class EditLocationDialogComponent {
     if (this.form.valid) {
       const location = this.form.value;
       if (this.data) {
-        this.locationService.updateLocation(this.data.id, location);
+        // Si ya existe la ubicación, actualizarla
+        this.locationService.updateLocation(this.data.id, location).subscribe({
+          next: () => {
+            console.log('Ubicación actualizada');
+            this.dialogRef.close(true);
+          },
+          error: (error) => {
+            console.error('Error al actualizar la ubicación:', error);
+          },
+        });
       } else {
-        this.locationService.addLocation(location);
+        // Si es una nueva ubicación, agregarla
+        this.locationService.addLocation(location).subscribe({
+          next: () => {
+            console.log('Ubicación agregada');
+            this.dialogRef.close(true);
+          },
+          error: (error) => {
+            console.error('Error al agregar la ubicación:', error);
+          },
+        });
       }
-      this.dialogRef.close();
     }
   }
 }

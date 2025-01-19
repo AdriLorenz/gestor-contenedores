@@ -1,14 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LocationService } from '../../../../core/services/location.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { EditLocationDialogComponent } from '../../dialogs/edit-location-dialog/edit-location-dialog.component';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-location-list',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   templateUrl: './location-list.component.html',
   styleUrl: './location-list.component.css',

@@ -9,17 +9,17 @@ import { ElementListComponent } from './app/features/elements/components/element
 import { MapComponent } from './app/features/map/components/map/map.component';
 import { importProvidersFrom } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/locations', pathMatch: 'full' },
+  { path: '', component: AppComponent },
   { path: 'locations', component: LocationListComponent },
   { path: 'elements', component: ElementListComponent },
-  { path: 'map', component: MapComponent },
 ];
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
-    importProvidersFrom(BrowserAnimationsModule, GoogleMapsModule, HttpClientModule),
+    importProvidersFrom(BrowserAnimationsModule, GoogleMapsModule, HttpClientModule, MatDialogModule, MatDialog),
   ],
 }).catch((err) => console.error(err));

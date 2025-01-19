@@ -1,14 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ElementService } from '../../../../core/services/element.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { EditElementDialogComponent } from '../../dialogs/edit-element-dialog/edit-element-dialog.component';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-element-list',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   templateUrl: './element-list.component.html',
   styleUrl: './element-list.component.css',

@@ -8,6 +8,7 @@ import { LocationListComponent } from './app/features/locations/components/locat
 import { ElementListComponent } from './app/features/elements/components/element-list/element-list.component';
 import { MapComponent } from './app/features/map/components/map/map.component';
 import { importProvidersFrom } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   { path: '', redirectTo: '/locations', pathMatch: 'full' },
@@ -19,6 +20,6 @@ const routes: Routes = [
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
-    importProvidersFrom(BrowserAnimationsModule, GoogleMapsModule),
+    importProvidersFrom(BrowserAnimationsModule, GoogleMapsModule, HttpClientModule),
   ],
 }).catch((err) => console.error(err));

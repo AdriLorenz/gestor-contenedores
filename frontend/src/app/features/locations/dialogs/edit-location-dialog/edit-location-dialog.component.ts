@@ -39,7 +39,7 @@ export class EditLocationDialogComponent {
     if (this.form.valid) {
       const location = this.form.value;
       if (this.data) {
-        this.locationService.updateLocations(this.data.id, location);
+        this.locationService.updateLocation(this.data.id, location);
       } else {
         this.locationService.addLocation(location);
       }

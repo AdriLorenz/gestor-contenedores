@@ -37,34 +37,6 @@ export class LocationListComponent {
       width: '400px',
       data: location,
     });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        if (location) {
-          // Editar ubicación existente
-          this.locationService.updateLocation(location.id, result).subscribe({
-            next: () => {
-              console.log('Ubicación actualizada con éxito');
-              this.locationService.getLocations();  // Actualizamos las ubicaciones
-            },
-            error: (error) => {
-              console.error('Error al actualizar la ubicación:', error);
-            }
-          });
-        } else {
-          // Agregar nueva ubicación
-          this.locationService.addLocation(result).subscribe({
-            next: () => {
-              console.log('Ubicación agregada con éxito');
-              this.locationService.getLocations(); // Actualizamos las ubicaciones
-            },
-            error: (error) => {
-              console.error('Error al agregar la ubicación:', error);
-            }
-          });
-        }
-      }
-    });
   }
 
   deleteLocation(id: number): void {

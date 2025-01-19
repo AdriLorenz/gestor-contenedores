@@ -43,7 +43,7 @@ export class EditLocationDialogComponent {
         this.locationService.updateLocation(this.data.id, location).subscribe({
           next: () => {
             console.log('Ubicación actualizada');
-            this.dialogRef.close(true);
+            this.dialogRef.close();
           },
           error: (error) => {
             console.error('Error al actualizar la ubicación:', error);
@@ -54,7 +54,7 @@ export class EditLocationDialogComponent {
         this.locationService.addLocation(location).subscribe({
           next: () => {
             console.log('Ubicación agregada');
-            this.dialogRef.close(true);
+            this.dialogRef.close();
           },
           error: (error) => {
             console.error('Error al agregar la ubicación:', error);

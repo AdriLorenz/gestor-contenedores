@@ -20,16 +20,14 @@ export class LocationService {
   }
 
   addLocation(location: any): Observable<any> {
-    console.log('Enviando datos al backend:', location);
-    return this.http.post<any>(this.apiUrl, location);
+    return this.http.post<any>(this.apiUrl, location).pipe(
+      tap(() => this.getLocations()) 
+    );
   }
 
-  // Actualizar ubicación existente
   updateLocation(id: number, updatedLocation: any): Observable<any> {
     return this.http.patch<any>(`${this.apiUrl}/${id}`, updatedLocation).pipe(
-      tap((response) => {
-        console.log('Ubicación actualizada:', response);
-      })
+      tap(() => this.getLocations()) 
     );
   }
 
